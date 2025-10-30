@@ -43,7 +43,7 @@ def cria_alfabeto_cesar(step)
   return alfabeto_cesar
 end
 
-def ceasar_cipher(str, step)
+def caesar_cipher(str, step)
   alfabeto_cesar = cria_alfabeto_cesar(step)
   new_str = []
 
@@ -61,8 +61,13 @@ def ceasar_cipher(str, step)
 end
 
 if __FILE__ == $0
-  #print 'Qual é o seu nome? '
-  #name = gets.chomp
-  #alfabeto = cria_alfabeto()
+  print "Qual frase você quer incriptografar? "
+  str = gets.chomp
+  print "Com quantos passos para o lado? (Digite um Numero) "
+  step = gets.chomp.to_i
+
+  ceasar_str = caesar_cipher(str, step)
+  puts "Aqui está sua frase encriptograda:"
+  puts ceasar_str
 
 end
