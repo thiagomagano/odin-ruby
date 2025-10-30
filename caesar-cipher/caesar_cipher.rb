@@ -15,59 +15,54 @@
 
 # Define a hash do Alfabeto
 
-def cria_alfabeto()
-  ("a".."z").each_with_index.to_h do |letter, index|
+def cria_alfabeto
+  ('a'..'z').each_with_index.to_h do |letter, index|
     [index, letter]
   end
 end
 
 def cria_alfabeto_cesar(step)
-  alfabeto = cria_alfabeto()
+  alfabeto = cria_alfabeto
 
   max_index = alfabeto.size
 
-  alfabeto_cesar = alfabeto.map.to_h do |index,letter|
+  alfabeto.map.to_h do |index, letter|
 
     new_index = index + step
 
     # Caso o numero z => a.., fazer a volta
-    if new_index >= max_index
-      new_index = new_index - max_index
-    end
+    new_index -= max_index if new_index >= max_index
 
     new_letter = alfabeto[new_index]
 
     [letter, new_letter]
   end
-
-  return alfabeto_cesar
 end
 
 def caesar_cipher(str, step)
   alfabeto_cesar = cria_alfabeto_cesar(step)
   new_str = []
-
-  str.split("").each do |letter|
+  str.split('').each do |letter|
     if letter.match?(/\A[A-Za-z]\z/) # regex pra verificar se é uma letra
       ceasar_letter = alfabeto_cesar[letter.downcase]  # Aqui faz a tradução da letra e.g: "a" => "f"
       # Em caso de letra maiscula sobe ela novamente
-      letter.match?(/[A-Z]/)? new_str.push(ceasar_letter.upcase) : new_str.push(ceasar_letter)
+      letter.match?(/[A-Z]/) ? new_str.push(ceasar_letter.upcase) : new_str.push(ceasar_letter)
     else # Caso não seja uma letra comum de A-Z não faz tradução
       new_str.push(letter)
     end
   end
-
-  new_str.join()
+  new_str.join
 end
 
-if __FILE__ == $0
-  print "Qual frase você quer incriptografar? "
+def main
+  print 'Qual frase você quer encriptografar? '
   str = gets.chomp
-  print "Com quantos passos para o lado? (Digite um Numero) "
+  print 'Com quantos passos para o lado? (Digite um Numero) '
   step = gets.chomp.to_i
 
   ceasar_str = caesar_cipher(str, step)
-  puts "Aqui está sua frase encriptograda:"
+  puts 'Aqui está sua frase encriptograda:'
   puts ceasar_str
-
 end
+
+main

@@ -1,6 +1,6 @@
 require 'minitest/autorun'
 
-require_relative "caesar_cipher"
+require_relative 'caesar_cipher'
 
 class ChallengeTest < Minitest::Test
   def test_it_should_create_alphabet
@@ -71,7 +71,7 @@ class ChallengeTest < Minitest::Test
 
   def test_it_should_translate_string_to_ceasar_alphabet
     want = "Bmfy f xywnsl!" # Valor esperado
-    got = ceasar_cipher("What a string!", 5) # Chamada pra função
+    got = caesar_cipher("What a string!", 5) # Chamada pra função
     assert_equal want, got
   end
 end
